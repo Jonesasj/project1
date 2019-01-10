@@ -2,7 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
-var auth = require('./auth');
+var auth = require('../middleware/auth');
 
 router.get('/', auth, function(req, res) {
     res.send("Main page");
