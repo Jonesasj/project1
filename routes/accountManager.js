@@ -5,7 +5,7 @@ var router = express.Router();
 var auth = require('../middleware/auth');
 
 router.get('/', auth, function(req, res) {
-    res.send("Main page");
+    res.render('accountManager');
 });
 
 module.exports = router;

@@ -11,6 +11,14 @@ const REDIRECT_URI = 'http%3A%2F%2Flocalhost%3A3000%2Foauth-redirect';
 
 
 let app = express();
+
+
+//Set where to find views and set the template engine to jade
+app.set('views', __dirname + '/views');
+app.set('view engine', 'pug');
+
+
+
 app.use(session({
     resave: false,
     saveUninitialized: false,
