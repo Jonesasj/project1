@@ -4,7 +4,7 @@ head
 body
   h1 Welcome to the account manager web application
   p please enter a 15 digit account id. Only alphanumeric characters are accepted
-  form(action='/accountManager/:id')
-    input(type='text' name='id' require pattern='[a-zA-Z0-9]{15}')
+  form(action='/accountManager/')
+    input(type='text' name='id' require pattern='[a-zA-Z0-9]{15,18}')
     input(type='submit' value='Submit')
 

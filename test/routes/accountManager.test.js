@@ -8,7 +8,7 @@ describe('AccountManager Route', function() {
             
 
         });
-        it('Should redirect with an error message if ')
+        it('Should should ')
 
     });
 });
