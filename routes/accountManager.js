@@ -11,7 +11,7 @@ var querystring = require('querystring');
 router.get('/', auth, function(req, res) {
     //if the user has specified a record id reroute them
     if(!req.query.id){
-        res.render('accountManager');
+        res.status(200).render('accountManager');
     } else {
         res.redirect('/accountManager/' + req.query.id);
     }
