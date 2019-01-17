@@ -3,4 +3,7 @@ head
   title 
 body
   p Name : #{Name} 
+  form(action='/accountManager/' + Id, method='post')
+    input(type='text', name='Name')
+    input(type='submit' value='Submit')
   

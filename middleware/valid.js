@@ -11,6 +11,7 @@ module.exports = function(req, res, next) {
         console.log('length: ' + req.params.id.length);
         console.log(typeof req.params.id);
         console.log('error');*/
+        console.log('here');
         res.status(400).render('error');
     }
 };

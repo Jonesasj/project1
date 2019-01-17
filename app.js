@@ -2,6 +2,7 @@
 
 const express = require('express');
 const session = require('express-session');
+const bodyParser = require('body-parser');
 
 
 //Information used for Oauth2
@@ -24,6 +25,12 @@ app.use(session({
     saveUninitialized: false,
     secret: 'alexjones'
 }));
+
+//Allows the use of req.body property
+console.log(bodyParser);
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
 
 
 //Load routes
