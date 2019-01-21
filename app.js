@@ -37,6 +37,7 @@ app.use(bodyParser.json());
 app.use('/', require('./routes/indexRedirect'));
 app.use('/oauth-redirect', require('./routes/oauthRedirect'));
 app.use('/accountManager', require('./routes/accountManager'));
+app.use('/contact', require('./routes/contact'));
 
 
 

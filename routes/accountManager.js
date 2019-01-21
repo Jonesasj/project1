@@ -33,6 +33,7 @@ router.get('/:id', valid, function(req, res) {
         if(code == 200) {
             res.render('accountPage', responseData);
         } else if (code == 400) {
+            console.log('1');
             res.render('error', responseData[0]);
         }
     });
@@ -44,7 +45,9 @@ router.post('/:id', valid, function(req, res) {
     apiCallout(req, res, endpoint, 'PATCH', function(req, res, responseData, code) {
         if(code == 204) {
             console.log('Status code: 204');
+            res.redirect('/accountManager/' + req.params.id);
         } else if (code == 400) {
+            console.log('2');
             res.render('error', responseData[0]);
         }
 
