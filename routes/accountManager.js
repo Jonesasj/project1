@@ -27,7 +27,11 @@ router.get('/', function(req, res) {
 
 router.get('/:id', valid, function(req, res) {
     //make an api call to retrieve the desired account record using the salesforce id
-    var endpoint = '/services/data/v44.0/sobjects/account/' + req.params.id;
+    //var endpoint = '/services/data/v44.0/sobjects/account/' + req.params.id;
+
+    var soqlQuery = 'SELECT Id, Name, (SELECT Id, LastName, Email FROM Contacts) FROM Account WHERE Id=\'' + req.params.id + '\'';
+    var encodedQuery = encodeURI(soqlQuery);
+    var endpoint = '/services/data/v44.0/query/?q=' + encodedQuery;
 
     apiCallout(req, res, endpoint, 'GET', function(req, res, responseData, code) {
         if(code == 200) {
@@ -65,7 +69,7 @@ router.post('/:id/createContact', valid, function(req, res) {
         if(code == 201) {
             res.redirect('/accountManager/' + req.params.id);
         } else if (code == 400) {
-            console.log('Something went wrong');
+            res.render('error', responseData[0]);
         }
    });
 });

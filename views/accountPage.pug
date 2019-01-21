@@ -2,15 +2,21 @@ doctype html
 head
   title 
 body
-  h6 Account details
-  p Name : #{Name}
-  h6 Update the Account Name
-  form(action='/accountManager/' + Id, method='post')
-    input(type='text', name='Name', value='New Name')
+  h3 Account details
+  p Name : #{records[0].Name}
+  h3 Related Contacts
+  ul
+    each val, index in records[0].Contacts.records
+      li= val.LastName + ' ' + val.Email
+
+
+  h3 Update the Account Name
+  form(action='/accountManager/' + records[0].Id, method='post')
+    input(type='text', name='Name')
     input(type='submit' value='Submit')
 
-  h6 Create a new contact to be linked to the current account
-  form(action='/accountManager/' + Id + '/createContact', method='post')
+  h3 Create a new contact to be linked to the current account
+  form(action='/accountManager/' + records[0].Id + '/createContact', method='post')
     | First Name: 
     input(type='text', name='firstName')
     |     Last Name: 
@@ -18,4 +24,8 @@ body
     |     Email Address: 
     input(type='text', name='email')
     input(type='submit' value='Submit')
+
+  h3
+    a(href='/AccountManager/')
+      |  Home
   
