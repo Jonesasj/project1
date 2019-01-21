@@ -2,8 +2,20 @@ doctype html
 head
   title 
 body
-  p Name : #{Name} 
+  h6 Account details
+  p Name : #{Name}
+  h6 Update the Account Name
   form(action='/accountManager/' + Id, method='post')
-    input(type='text', name='Name')
+    input(type='text', name='Name', value='New Name')
+    input(type='submit' value='Submit')
+
+  h6 Create a new contact to be linked to the current account
+  form(action='/accountManager/' + Id + '/createContact', method='post')
+    | First Name: 
+    input(type='text', name='firstName')
+    |     Last Name: 
+    input(type='text', name='lastName', required='')
+    |     Email Address: 
+    input(type='text', name='email')
     input(type='submit' value='Submit')
   
