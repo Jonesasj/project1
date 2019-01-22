@@ -1,0 +1,12 @@
+doctype html
+head
+  title Project One
+body
+  h2 Contacts with the requested email address
+  ul
+    each val, index in records
+      li Last Name: #{val.LastName}, Account Name: #[a(href='/accountManager/' + val.Account.Id) #{val.Account.Name}]
+
+  h3
+    a(href='/AccountManager/')
+      |  Home

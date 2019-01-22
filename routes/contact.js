@@ -19,7 +19,8 @@ router.get('/', function(req, res) {
                 res.send('The email address you entered does not belong to a contact');  
             } else {
                 console.log('successful');
-                res.json(responseData);
+                //res.json(responseData);
+                res.render('contact', responseData);
             }
 
         } else if (code == 400 || code == 404) {
