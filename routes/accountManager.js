@@ -25,7 +25,7 @@ router.get('/', function(req, res) {
 //router.use('/:gradId', require('./getGradId'));
 //router.use('/:email', require('./getEmail'));
 
-router.get('/:id', valid, function(req, res) {
+router.get('/:id', valid.salesForceId, function(req, res) {
     //make an api call to retrieve the desired account record using the salesforce id
     //var endpoint = '/services/data/v44.0/sobjects/account/' + req.params.id;
 
@@ -49,7 +49,7 @@ router.get('/:id', valid, function(req, res) {
     });
 });
 
-router.post('/:id', valid, function(req, res) {
+router.post('/:id', valid.salesForceId, function(req, res) {
     console.log('please not here');
     var endpoint = '/services/data/v44.0/sobjects/account/' + req.params.id;
 
@@ -67,7 +67,7 @@ router.post('/:id', valid, function(req, res) {
     });
 });
 
-router.post('/:id/createContact', valid, function(req, res) {
+router.post('/:id/createContact', valid.salesForceId, function(req, res) {
     console.log('please here');
     req.body.AccountId = req.params.id;
     var endpoint = '/services/data/v44.0/sobjects/contact';

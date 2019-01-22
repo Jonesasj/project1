@@ -3,6 +3,7 @@
 var express = require('express');
 var router = express.Router();
 var apiCallout = require('../helper/apiCalls');
+var valid = require('../middleware/valid')
 
 router.get('/', function(req, res) {
         //if the user has specified a record id reroute them
@@ -13,7 +14,7 @@ router.get('/', function(req, res) {
         }
 });
 
-router.get('/:gradId', function(req, res) {
+router.get('/:gradId', valid.gradwellId, function(req, res) {
 
     var soqlQuery = 'SELECT Id, Name, GradwellId__c, (SELECT Id, LastName, Email FROM Contacts) FROM Account WHERE gradwellId__c=' + req.params.gradId;
     var encodedQuery = encodeURI(soqlQuery);

@@ -2,11 +2,10 @@
 
 var express = require('express');
 var router = express.Router();
-var https = require('https');
-var querystring = require('querystring');
 var apiCallout = require('../helper/apiCalls');
+var valid = require('../middleware/valid');
 
-router.get('/', function(req, res) {
+router.get('/', valid.email, function(req, res) {
 
     var soqlQuery = 'SELECT Id, LastName, Account.Id, Account.Name FROM Contact WHERE email=\'' + req.query.email + '\'';
     var encodedQuery = encodeURI(soqlQuery);
@@ -16,7 +15,10 @@ router.get('/', function(req, res) {
     apiCallout(req, res, endpoint, 'GET', function(req, res, responseData, code) {
         if(code == 200) {
             if(responseData.totalSize == 0) {
-                res.send('The email address you entered does not belong to a contact');  
+                res.render('error', {
+                    message : 'The email address you have entered does not belong to a contact in salesforce',
+                    errorCode : 'CUSTOM_ERROR'
+                }); 
             } else {
                 console.log('successful');
                 //res.json(responseData);
@@ -27,7 +29,6 @@ router.get('/', function(req, res) {
             res.render('error', responseData[0]);
         } 
     });
-
 });
 
 module.exports = router;
