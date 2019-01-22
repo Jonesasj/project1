@@ -3,8 +3,6 @@
 var express = require('express');
 var router = express.Router();
 var valid = require('../middleware/valid');
-var https = require('https');
-var querystring = require('querystring');
 var apiCallout = require('../helper/apiCalls');
 var auth = require('../middleware/auth');
 
@@ -19,11 +17,6 @@ router.get('/', function(req, res) {
     }
 
 });
-
-// id and gradId return the same data by different means
-//router.use('/:id', require('./getId'));
-//router.use('/:gradId', require('./getGradId'));
-//router.use('/:email', require('./getEmail'));
 
 router.get('/:id', valid.salesForceId, function(req, res) {
     //make an api call to retrieve the desired account record using the salesforce id
@@ -50,7 +43,6 @@ router.get('/:id', valid.salesForceId, function(req, res) {
 });
 
 router.post('/:id', valid.salesForceId, function(req, res) {
-    console.log('please not here');
     var endpoint = '/services/data/v44.0/sobjects/account/' + req.params.id;
 
 
@@ -68,7 +60,6 @@ router.post('/:id', valid.salesForceId, function(req, res) {
 });
 
 router.post('/:id/createContact', valid.salesForceId, function(req, res) {
-    console.log('please here');
     req.body.AccountId = req.params.id;
     var endpoint = '/services/data/v44.0/sobjects/contact';
 
