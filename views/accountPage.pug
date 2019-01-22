@@ -15,6 +15,14 @@ body
     input(type='text', name='Name')
     input(type='submit' value='Submit')
 
+  if !records[0].GradwellId__c
+    h3 There is no gradwell Id associated with this account, you may enter one in the textbox below
+    form(action='/accountManager/' + records[0].Id, method='post')
+      input(type='text', name='GradwellId__c')
+      input(type='submit' value='Submit')
+
+
+
   h3 Create a new contact to be linked to the current account
   form(action='/accountManager/' + records[0].Id + '/createContact', method='post')
     | First Name: 

@@ -38,6 +38,7 @@ app.use('/', require('./routes/indexRedirect'));
 app.use('/oauth-redirect', require('./routes/oauthRedirect'));
 app.use('/accountManager', require('./routes/accountManager'));
 app.use('/contact', require('./routes/contact'));
+app.use('/gradwellId', require('./routes/gradwellId'));
 
 
 
