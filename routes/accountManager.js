@@ -72,5 +72,31 @@ router.post('/:id/createContact', valid.salesForceId, function(req, res) {
    });
 });
 
+//Just to test my ajax
+router.get('/ajax/:sfid', function(req, res) {
+    console.log('made it to the route');
+    console.log(req.params.sfid);
+
+    var soqlQuery = 'SELECT Id, Name, GradwellId__c, (SELECT Id, LastName, Email FROM Contacts) FROM Account WHERE Id=\'' + req.params.sfid + '\'';
+    var encodedQuery = encodeURI(soqlQuery);
+    var endpoint = '/services/data/v44.0/query/?q=' + encodedQuery;
+
+    apiCallout(req, res, endpoint, 'GET', function(req, res, responseData, code) {
+        if(code == 200) {
+            if(responseData.totalSize == 0) {
+                res.json({
+                    message : 'The requested account id does not belong to an account',
+                    errorCode : 'CUSTOM_ERROR'
+                });
+            } else {
+                console.log('The account exists and its page should be redirected to');
+                res.status(200).end();
+            }
+        } else if (code == 400) {
+            res.json(responseData[0]);
+        }
+    });
+});
+
 
 module.exports = router;

@@ -1,6 +1,7 @@
 doctype html
 head
   title Project One
+  script(src='../client-src/ajax.js')
 body
   h1 Welcome to the account manager web application
   form(action='/accountManager/')
@@ -15,5 +16,16 @@ body
     |  Email Address: 
     input(type='text' name='email')
     input(type='submit' value='Submit')
+
+  div(id='demo')
+    h2 This is my ajax test
+    button(type='button' onclick='ajaxTest()')
+
+  h3 Ajax form
+  form(id='sfform' name='form')
+    label Name: 
+    input(id='sfid' type='text' name='id' require pattern='[a-zA-Z0-9]{15,18}')
+    input(type='button' onclick='ajaxTest()' value='Submit')
+    span(id='sfidError')
 
 

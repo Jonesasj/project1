@@ -34,13 +34,16 @@ app.use(bodyParser.json());
 
 
 //Load routes
+app.use('/', function(req, res, next) {
+    console.log(req.originalUrl);
+    next();
+});
 app.use('/', require('./routes/indexRedirect'));
+app.use('/client-src', express.static(__dirname + '/client-src'));
 app.use('/oauth-redirect', require('./routes/oauthRedirect'));
 app.use('/accountManager', require('./routes/accountManager'));
 app.use('/contact', require('./routes/contact'));
 app.use('/gradwellId', require('./routes/gradwellId'));
-
-
 
 
 //Start listing*/
