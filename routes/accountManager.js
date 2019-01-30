@@ -84,17 +84,33 @@ router.get('/ajax/:sfid', function(req, res) {
     apiCallout(req, res, endpoint, 'GET', function(req, res, responseData, code) {
         if(code == 200) {
             if(responseData.totalSize == 0) {
-                res.json({
+                res.status(400).json({
                     message : 'The requested account id does not belong to an account',
                     errorCode : 'CUSTOM_ERROR'
                 });
             } else {
                 console.log('The account exists and its page should be redirected to');
-                res.status(200).end();
+                res.status(200).json(responseData);
             }
         } else if (code == 400) {
             res.json(responseData[0]);
         }
+    });
+});
+
+router.post('ajax/:sfid', valid.salesForceId, function(req, res) {
+
+    var endpoint = '/services/data/v44.0/sobjects/account/' + req.params.id;
+
+    apiCallout(req, res, endpoint, 'PATCH', function(req, res, responseData, code) {
+        if(code == 204) {
+            console.log('Status code: 204');
+            res.status(204).end();
+
+        } else if (code == 400) {
+            res.status(400).json(responseData[0]);
+        }
+
     });
 });
 

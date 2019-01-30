@@ -15,6 +15,13 @@ body
     input(type='text', name='Name')
     input(type='submit' value='Submit')
 
+  h3 Update the Account Name using ajax
+  form()
+    label Update account name:
+    input(id='accountName' type='text', name='Name')
+    input(type='submit' value='Submit')
+    span(id='postNameError')
+
   if !records[0].GradwellId__c
     h3 There is no gradwell Id associated with this account, you may enter one in the textbox below
     form(action='/accountManager/' + records[0].Id, method='post')
